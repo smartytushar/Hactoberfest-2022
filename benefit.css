@@ -1,0 +1,18 @@
+.head {
+    /* width: 718px;
+    height: 48px; */
+    font-weight: 700;
+    font-size: 40px;
+    /* left: 50%; */
+    /* line-height: 48px; */
+    /* display: flex; */
+    color: rgba(255, 105, 73, 0.83);
+    /* /text-align: center; */
+    /* justify-content: center; */
+    /* justify-items: center; */
+    margin-left: 100px;
+}
+
+.main{
+    margin-top: 50px;
+}
