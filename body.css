@@ -1,0 +1,5 @@
+.container-card:hover{
+    background-color: #FF6949D4;
+    color: white;
+    transition: 0.5s;
+}
