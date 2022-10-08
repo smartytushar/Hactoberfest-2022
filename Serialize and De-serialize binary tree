@@ -1,0 +1,65 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Codec {
+public:
+
+    void serializeHelper(TreeNode* root , string &s)
+    {
+        if(root==NULL)return;
+        s.append(to_string(root->val)+',');
+        serializeHelper(root->left,s);    
+        serializeHelper(root->right,s);
+    }
+    
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+      string s="";
+        serializeHelper(root,s);
+        return s;
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        if(data == "")return NULL;
+        return deserializeHelper(data,INT_MIN,INT_MAX);
+    }
+    
+    int convertStringtoInt(string& data, int& pos){ // Find ',' and return value
+        pos=data.find(',');
+        int value=stoi(data.substr(0, pos));
+        return value;
+    }
+    
+    TreeNode* deserializeHelper(string &data , int mini , int maxi)
+    {
+        if(data.size()==0)return NULL;
+        int pos = 0;
+        
+        int value = convertStringtoInt(data,pos);
+        if(value<mini || value>maxi)return NULL;
+        TreeNode* tnode = new TreeNode(value);
+        
+        data = data.substr(pos+1);
+        tnode->left = deserializeHelper(data,mini , tnode->val);
+        tnode->right = deserializeHelper(data,tnode->val ,maxi);
+        return tnode;
+
+        
+        
+    }
+    
+};
+
+// Your Codec object will be instantiated and called as such:
+// Codec* ser = new Codec();
+// Codec* deser = new Codec();
+// string tree = ser->serialize(root);
+// TreeNode* ans = deser->deserialize(tree);
+// return ans;
